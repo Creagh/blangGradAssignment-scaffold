@@ -1,5 +1,9 @@
 # Assignment on Blang
 
+## Continuous Integration with Travis
+
+[![Build Status](https://travis-ci.org/Creagh/blangGradAssignment-scaffold.png?branch=master)](https://travis-ci.org/Creagh/blangGradAssignment-scaffold)
+
 ## Prerequisites
 
 I assume you have already done the following (lecture and office hour last week):
