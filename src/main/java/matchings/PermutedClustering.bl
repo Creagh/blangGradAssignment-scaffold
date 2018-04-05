@@ -16,6 +16,40 @@ model PermutedClustering {
   random Matrix observations ?: latentMatrix(nGroups, groupSize)
   
   laws {
-    // Fill this. 
+    // Fill this.
+    
+    /**
+     * Prior distribution over the permutations
+     */ 
+     
+     for (Permutation perm : permutations) {
+     	perm ~ UniformPermutation()
+     }
+
+    /**
+     * Prior distributions on the latent means and variances
+     */
+     
+     means.get(0) ~ ContinuousUniform(0.0, 1.0)
+     variances.get(0) ~ Exponential(10.0)
+     
+     for (int i : 1 ..< groupSize) {
+     	means.get(i) | RealVar prevMean = means.get(i-1) ~ ContinuousUniform(prevMean, prevMean + 1.0)
+     	variances.get(i) ~ Exponential(10.0)
+     }
+     
+     /** 
+      * Likelihood distribution on the scores
+      */
+      for (int i : 0 ..< nGroups) { // loop over games
+      	for (int j : 0 ..< groupSize) { // loop over players
+      		observations.getRealVar(i, j) | means, variances, 
+      			int playerRank = permutations.get(i).getConnections().get(j) ~ 
+      			Normal(means.get(playerRank), variances.get(playerRank))
+      		
+      	}
+      }
+      
+     
   }
 }
