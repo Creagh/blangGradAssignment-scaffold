@@ -16,10 +16,10 @@ process build {
   current_dir=`pwd`
   cd ../../../..
   ./gradlew build
-  ./gradlew printClasspath | grep CLASSPATH-ENTRY | sort | sed 's/CLASSPATH[-]ENTRY //' > \$current_dir/temp_classpath
+  ./gradlew printClasspath | grep CLASSPATH-ENTRY | sort | sed 's/CLASSPATH[-]ENTRY //' > "\$current_dir/temp_classpath"
   for file in `ls build/libs/*jar`
   do
-    echo `pwd`/\$file >> \$current_dir/temp_classpath
+    echo `pwd`/\$file >> "\$current_dir/temp_classpath"
   done
   cd -
   touch jars_hash

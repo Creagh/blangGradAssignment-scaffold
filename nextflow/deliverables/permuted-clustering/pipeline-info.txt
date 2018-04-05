@@ -1,0 +1,4 @@
+scriptName: permuted-clustering.nf
+start: Wed Apr 04 20:25:11 PDT 2018
+runName: sleepy_shaw
+nextflow.version: 0.28.0
